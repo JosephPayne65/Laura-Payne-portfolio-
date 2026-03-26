@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laura Payne — Marketing Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --cream:#F4F7F9; --warm-white:#FAFCFD; --sand:#D6E4EC; --tan:#A8C4D0; --terra:#2A7B9B; --charcoal:#1A2E38; --mid:#4A6470; --light-mid:#85A0AA; --accent:#3AA0C2; --highlight:#E8F4F8; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--cream);color:var(--charcoal);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 56px;background:rgba(244,247,249,0.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--sand);}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;letter-spacing:0.04em;color:var(--charcoal);text-decoration:none;}
+  .nav-links{display:flex;gap:36px;list-style:none;align-items:center;}
+  .nav-links a{font-size:13px;font-weight:400;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color 0.2s;}
+  .nav-links a:hover{color:var(--accent);}
+  .nav-cta{background:var(--accent);color:#fff !important;padding:9px 22px;border-radius:2px;transition:background 0.2s !important;}
+  .nav-cta:hover{background:var(--terra) !important;}
+  section{padding:100px 56px;}
+  .section-header{margin-bottom:64px;}
+  .section-tag{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+  .section-tag::before{content:'';width:28px;height:1px;background:var(--accent);display:block;}
+  .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,54px);font-weight:400;line-height:1.1;color:var(--charcoal);}
+  .section-title em{font-style:italic;color:var(--accent);}
+  .divider{border:none;border-top:1px solid var(--sand);margin:0 56px;}
+  #about{background:var(--warm-white);padding-top:100px;}
+  .about-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start;}
+  .about-left{position:sticky;top:80px;}
+  .about-portrait{width:100%;aspect-ratio:3/4;border-radius:2px;overflow:hidden;margin-bottom:24px;}
+  .about-portrait img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+  .about-name-card h3{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--charcoal);}
+  .about-name-card p{font-size:13px;color:var(--mid);letter-spacing:0.06em;text-transform:uppercase;margin-top:4px;}
+  .about-body p{font-size:16px;color:var(--mid);line-height:1.85;margin-bottom:24px;}
+  .about-body p:last-child{margin-bottom:0;}
+  .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:40px;}
+  .skill-pill{background:var(--highlight);border:1px solid var(--sand);padding:10px 16px;border-radius:2px;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--mid);font-weight:400;}
+  #work{background:var(--cream);}
+  .filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:48px;}
+  .filter-btn{padding:8px 20px;border-radius:2px;border:1px solid var(--sand);background:transparent;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:400;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);cursor:pointer;transition:all 0.2s;}
+  .filter-btn:hover,.filter-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:2px;}
+  .project-card{position:relative;overflow:hidden;cursor:pointer;background:var(--warm-white);transition:transform 0.3s;}
+  .project-card:hover{transform:translateY(-4px);z-index:2;}
+  .card-image{width:100%;aspect-ratio:16/10;overflow:hidden;position:relative;background:var(--sand);}
+  .card-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s;}
+  .project-card:hover .card-image img{transform:scale(1.03);}
+  .card-overlay{position:absolute;inset:0;background:rgba(26,46,56,0.72);opacity:0;transition:opacity 0.3s;display:flex;align-items:center;justify-content:center;}
+  .project-card:hover .card-overlay{opacity:1;}
+  .overlay-cta{background:#fff;color:var(--charcoal);padding:12px 28px;border-radius:2px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;cursor:pointer;border:none;}
+  .card-body{padding:24px 28px 28px;}
+  .card-meta{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:8px;display:flex;gap:12px;align-items:center;}
+  .card-meta span{color:var(--light-mid);}
+  .card-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--charcoal);line-height:1.2;margin-bottom:10px;}
+  .card-desc{font-size:13px;color:var(--mid);line-height:1.7;margin-bottom:16px;}
+  .card-results{display:flex;gap:8px;flex-wrap:wrap;}
+  .result-chip{background:var(--highlight);border:1px solid var(--sand);padding:5px 12px;border-radius:2px;font-size:11px;color:var(--mid);letter-spacing:0.04em;}
+  .resume-banner{background:var(--highlight);border-top:1px solid var(--sand);border-bottom:1px solid var(--sand);padding:20px 56px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+  .resume-banner-text h3{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--charcoal);}
+  .resume-banner-text p{font-size:13px;color:var(--mid);margin-top:2px;}
+  .btn-primary{background:var(--accent);color:#fff;padding:14px 32px;border-radius:2px;text-decoration:none;font-size:13px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;transition:background 0.2s,transform 0.2s;display:inline-block;}
+  .btn-primary:hover{background:var(--terra);transform:translateY(-1px);}
+  .modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(26,46,56,0.72);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:40px 24px;}
+  .modal-overlay.open{display:flex;}
+  .modal{background:var(--warm-white);border-radius:2px;max-width:760px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:modalIn 0.3s ease;}
+  @keyframes modalIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+  .modal-close{position:absolute;top:20px;right:20px;background:var(--highlight);border:1px solid var(--sand);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:18px;color:var(--mid);display:flex;align-items:center;justify-content:center;z-index:10;transition:all 0.2s;}
+  .modal-close:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .modal-header{padding:48px 48px 32px;border-bottom:1px solid var(--sand);}
+  .modal-tag{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:12px;}
+  .modal-title{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:var(--charcoal);line-height:1.1;margin-bottom:12px;}
+  .modal-role{font-size:14px;color:var(--mid);font-style:italic;}
+  .modal-body{padding:40px 48px 48px;}
+  .modal-section{margin-bottom:32px;}
+  .modal-section h4{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:14px;}
+  .modal-section p{font-size:15px;color:var(--mid);line-height:1.8;}
+  .modal-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+  .modal-list li{font-size:14px;color:var(--mid);padding-left:20px;position:relative;line-height:1.65;}
+  .modal-list li::before{content:"\2192";position:absolute;left:0;color:var(--accent);font-size:12px;}
+  .modal-results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;}
+  .modal-result-card{background:var(--highlight);border:1px solid var(--sand);padding:16px 20px;border-radius:2px;}
+  .modal-result-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--charcoal);line-height:1;}
+  .modal-result-label{font-size:11px;letter-spacing:0.06em;color:var(--mid);margin-top:4px;}
+  footer{background:#111C22;padding:36px 56px;display:flex;align-items:flex-start;justify-content:space-between;gap:40px;border-top:1px solid rgba(244,247,249,0.07);flex-wrap:wrap;}
+  .footer-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:rgba(244,247,249,0.45);text-decoration:none;flex-shrink:0;padding-top:4px;}
+  .footer-contact-block{flex:1;min-width:260px;}
+  .footer-blurb{font-size:13px;color:rgba(244,247,249,0.5);line-height:1.8;margin-bottom:18px;max-width:580px;}
+  .footer-links-row{display:flex;gap:28px;flex-wrap:wrap;}
+  .footer-links-row a{font-size:13px;color:rgba(244,247,249,0.7);text-decoration:none;transition:color 0.2s;}
+  .footer-links-row a:hover{color:#7EC8D8;}
+  .footer-copy{font-size:11px;color:rgba(244,247,249,0.2);letter-spacing:0.04em;align-self:flex-end;flex-shrink:0;}
+  .fade-up{opacity:0;transform:translateY(28px);transition:opacity 0.6s ease,transform 0.6s ease;}
+  .fade-up.visible{opacity:1;transform:none;}
+  @media(max-width:768px){
+    nav{padding:14px 24px;} .nav-links{display:none;}
+    section{padding:72px 24px;} #about{padding-top:80px;}
+    .about-grid{grid-template-columns:1fr;} .about-left{position:static;}
+    .projects-grid{grid-template-columns:1fr;}
+    footer{flex-direction:column;gap:20px;padding:28px 24px;}
+    .footer-links-row{flex-direction:column;gap:10px;}
+    .resume-banner{flex-direction:column;padding:18px 24px;text-align:center;}
+    .divider{margin:0 24px;}
+    .modal-header{padding:32px 24px 24px;} .modal-body{padding:28px 24px 32px;}
+    .modal-results-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#about" class="nav-logo">Laura Payne</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="Laura_Payne_Resume.pdf" class="nav-cta" target="_blank">Resume &#8595;</a></li>
+  </ul>
+</nav>
+
+<section id="about">
+  <div class="about-grid">
+    <div class="about-left fade-up">
+      <div class="about-portrait">
+        <img src="images/laura_payne.jpg" alt="Laura Payne">
+      </div>
+      <div class="about-name-card">
+        <h3>Laura Payne</h3>
+        <p>Senior Marketing Leader</p>
+      </div>
+    </div>
+    <div class="about-right fade-up">
+      <div class="section-header">
+        <div class="section-tag">About</div>
+        <h2 class="section-title">Strategy-first marketer. <em>People-first leader.</em></h2>
+      </div>
+      <div class="about-body">
+        <p>Marketing found me, or maybe I found it. Either way, 15+ years in, I'm still genuinely excited about the work. There's something I love about the challenge of taking a big idea and figuring out how to make it land, whether that's a global brand transformation or a campaign that needs to be live by Friday. I've had the privilege of leading marketing and communications for many brands, across industries, and across a lot of time zones. What's stayed consistent throughout is how I approach the work: start with the insight, build toward the idea, develop the strategy, and never lose sight of the outcome.</p>
+        <p>I'm also a people leader at heart. I've built and mentored teams throughout my career, and that part of the job, watching someone grow, seeing a team find its rhythm, is something I find just as rewarding as any campaign result.</p>
+        <p>Outside of work, I'm usually planning my next trip, experimenting with something new in the kitchen, or out on a trail. I believe in getting outside, slowing down, and spending real time with the people who matter most.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-pill">Integrated Campaigns</div><div class="skill-pill">Brand Strategy</div>
+        <div class="skill-pill">Demand Generation</div><div class="skill-pill">Content Marketing</div>
+        <div class="skill-pill">Digital &amp; Social</div><div class="skill-pill">Executive Comms</div>
+        <div class="skill-pill">Events &amp; Experiential</div><div class="skill-pill">Agency Management</div>
+        <div class="skill-pill">Global Marketing</div><div class="skill-pill">Team Leadership</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section id="work">
+  <div class="section-header fade-up">
+    <div class="section-tag">Portfolio</div>
+    <h2 class="section-title">Selected <em>Work</em></h2>
+  </div>
+  <div class="filter-bar fade-up">
+    <button class="filter-btn active" data-filter="all">All Work</button>
+    <button class="filter-btn" data-filter="campaigns">Integrated Campaigns</button>
+    <button class="filter-btn" data-filter="brand">Brand &amp; Strategy</button>
+    <button class="filter-btn" data-filter="events">Events</button>
+    <button class="filter-btn" data-filter="digital">Digital &amp; Social</button>
+    <button class="filter-btn" data-filter="partnerships">Partnerships</button>
+    <button class="filter-btn" data-filter="additional">Additional Experience</button>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card fade-up" data-category="campaigns" onclick="openModal('modal-1')">
+      <div class="card-image"><img src="images/Infusions.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="card-overlay"><button class="overlay-cta">View Project</button></div></div>
+      <div class="card-body">
+        <div class="card-meta">Integrated Campaigns <span>&middot;</span> 2018</div>
+        <h3 class="card-title">Isopure Infusions: Innovation Launch</h3>
+        <p class="card-desc">Led go-to-market strategy to expand Isopure beyond performance nutrition into a broader lifestyle audience.</p>
+        <div class="card-results"><span class="result-chip">Global Campaign</span><span class="result-chip">Influencer Strategy</span><span class="result-chip">Retail Activation</span></div>
+      </div>
+    </div>
+    <div class="project-card fade-up" data-category="campaigns" onclick="openModal('modal-2')">
+      <div class="card-image"><img src="images/Pure_is_Personal.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="card-overlay"><button class="overlay-cta">View Project</button></div></div>
+      <div class="card-body">
+        <div class="card-meta">Integrated Campaigns <span>&middot;</span> 2021</div>
+        <h3 class="card-title">Isopure "Pure Is Personal" Campaign</h3>
+        <p class="card-desc">Co-led brand repositioning campaign to drive differentiation and expand reach to new consumer segments.</p>
+        <div class="card-results"><span class="result-chip">20M+ Impressions</span><span class="result-chip">+12% Web Traffic</span><span class="result-chip">+5% Brand Awareness</span></div>
+      </div>
+    </div>
+    <div class="project-card fade-up" data-category="campaigns" onclick="openModal('modal-3')">
+      <div class="card-image"><img src="images/Food_Flavor_Outlook.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="card-overlay"><button class="overlay-cta">View Project</button></div></div>
+      <div class="card-body">
+        <div class="card-meta">Integrated Campaigns <span>&middot;</span> 2023&ndash;2024</div>
+        <h3 class="card-title">Griffith Foods: Food &amp; Flavor Outlook</h3>
+        <p class="card-desc">Built a flagship thought leadership platform to drive customer engagement and support sales conversations around innovation.</p>
+        <div class="card-results"><span class="result-chip">400+ Leads</span><span class="result-chip">1.5% LinkedIn CTR</span><span class="result-chip">50+ Sales Convos</span></div>
+      </div>
+    </div>
+    <div class="project-card fade-up" data-category="campaigns" onclick="openModal('modal-4')">
+      <div class="card-image"><img src="images/White_Papers.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="card-overlay"><button class="overlay-cta">View Project</button></div></div>
+      <div class="card-body">
+        <div class="card-meta">Integrated Campaigns <span>&middot;</span> 2024</div>
+        <h3 class="card-title">Griffith Foods: Thought Leadership White Papers</h3>
+        <p class="card-desc">Launched a white paper series to elevate internal experts and generate high-quality pipeline leads.</p>
+        <div class="card-results"><span class="result-chip">1,200+ Downloads</span><span class="result-chip">300 MQLs</span><span class="result-chip">5% Email CTR</span></div>
+      </div>
+    </div>
+    <div class="project-card fade-up" data-category="brand" onclick="openModal('modal-5')">
+      <div class="card-image"><img src="images/Griffith_Transformation.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="card-overlay"><button class="overlay-cta">View Project</button></div></div>
+      <div class="card-body">
+        <div class="card-meta">Brand &amp; Strategy <span>&middot;</span> 2022</div>
+        <h3 class="card-title">Griffith Foods: Global Brand Transformation</h3>
+        <p class="card-desc">Transformed a fragmented global brand into a cohesive system across 5 regions and 12 markets.</p>
+        <div class="card-results"><span class="result-chip">100% Global Adoption</span><span class="result-chip">+25% Speed-to-Market</span><span class="result-chip">12 Markets</span></div>
+      </div>
+    </div>
+    <div class="project-card fade-up" data-category="brand" onclick="openModal('modal-6')">
+      <div class="card-image"><img src="images/exec_comms.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="card-overlay"><button class="overlay-cta">View Project</button></div></div>
+      <div class="card-body">
+        <div class="card-meta">Brand &amp; Strategy <span>&middot;</span> 2022&ndash;2025</div>
+        <h3 class="card-title">Executive &amp; Leadership Communications</h3>
+        <p class="card-desc">Strategic advisor and content lead for C-suite communications, building leadership presence across channels.</p>
+        <div class="card-results"><span class="result-chip">20+ Initiatives</span><span class="result-chip">+25% Engagement</span><span class="result-chip">C-Suite Advisory</span></div>
+      </div>
+    </div>
+    <div class="project-card fade-up" data-category="brand" onclick="openModal('modal-7')">
+      <div class="card-image"><img src="images/USPR_Brand.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="card-overlay"><button class="overlay-cta">View Project</button></div></div>
+      <div class="card-body">
+        <div class="card-meta">Brand &amp; Strategy <span>&middot;</span> 2025</div>
+        <h3 class="card-title">USPR Brand Refresh</h3>
+        <p class="card-desc">Led end-to-end brand repositioning, from archetype development to guidelines, elevating market relevance.</p>
+        <div class="card-results"><span class="result-chip">Full Brand System</span><span class="result-chip">Internal Alignment</span><span class="result-chip">Agency Led</span></div>
+      </div>
+    </div>
+    <div class="project-card fade-up" data-category="partnerships" onclick="openModal('modal-8')">
+      <div class="card-image"><img src="images/Licensing.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="card-overlay"><button class="overlay-cta">View Project</button></div></div>
+      <div class="card-body">
+        <div class="card-meta">Partnerships &amp; Licensing <span>&middot;</span> 2021&ndash;2022</div>
+        <h3 class="card-title">Wells Licensing: Sega &amp; Disney</h3>
+        <p class="card-desc">Managed and expanded high-value licensing partnerships, securing a Sega contract extension through 2028.</p>
+        <div class="card-results"><span class="result-chip">10% Portfolio Share</span><span class="result-chip">Extended to 2028</span><span class="result-chip">Improved Margins</span></div>
+      </div>
+    </div>
+    <div class="project-card fade-up" data-category="events" onclick="openModal('modal-9')">
+      <div class="card-image"><img src="images/Isopure_event.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="card-overlay"><button class="overlay-cta">View Project</button></div></div>
+      <div class="card-body">
+        <div class="card-meta">Events &amp; Experiential <span>&middot;</span> 2019</div>
+        <h3 class="card-title">Isopure Events Strategy</h3>
+        <p class="card-desc">Led experiential marketing across major industry events driving awareness, engagement, and lead capture.</p>
+        <div class="card-results"><span class="result-chip">3,000+ Visitors/Event</span><span class="result-chip">1,500+ Emails/Event</span><span class="result-chip">Social Amplification</span></div>
+      </div>
+    </div>
+    <div class="project-card fade-up" data-category="events" onclick="openModal('modal-10')">
+      <div class="card-image"><img src="images/2030_Aspirations.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="card-overlay"><button class="overlay-cta">View Project</button></div></div>
+      <div class="card-body">
+        <div class="card-meta">Events &amp; Experiential <span>&middot;</span> 2024</div>
+        <h3 class="card-title">Griffith Foods: 2030 Aspirations Global Summit</h3>
+        <p class="card-desc">Designed and executed a 3-day global leadership summit for 230 leaders to launch Griffith's sustainability strategy.</p>
+        <div class="card-results"><span class="result-chip">230 Global Leaders</span><span class="result-chip">3-Day Event</span><span class="result-chip">Custom Event App</span></div>
+      </div>
+    </div>
+    <div class="project-card fade-up" data-category="digital" onclick="openModal('modal-11')">
+      <div class="card-image"><img src="images/Digital_social.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="card-overlay"><button class="overlay-cta">View Project</button></div></div>
+      <div class="card-body">
+        <div class="card-meta">Digital &amp; Social <span>&middot;</span> 2018&ndash;2025</div>
+        <h3 class="card-title">Digital &amp; Social Strategy</h3>
+        <p class="card-desc">Owned digital and social strategy, budget, and execution across multiple brands over 7+ years.</p>
+        <div class="card-results"><span class="result-chip">$4M+ Budget</span><span class="result-chip">50K+ LinkedIn Followers</span><span class="result-chip">1&ndash;5% Engagement</span></div>
+      </div>
+    </div>
+    <div class="project-card fade-up" data-category="digital" onclick="openModal('modal-12')">
+      <div class="card-image"><img src="images/Collaborations.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="card-overlay"><button class="overlay-cta">View Project</button></div></div>
+      <div class="card-body">
+        <div class="card-meta">Digital &amp; Social <span>&middot;</span> 2020</div>
+        <h3 class="card-title">Isopure Social Collaborations</h3>
+        <p class="card-desc">Led 9 cross-brand social partnerships generating massive reach and measurable follower growth.</p>
+        <div class="card-results"><span class="result-chip">5&ndash;20M Reach</span><span class="result-chip">3M Engagements</span><span class="result-chip">6K New Followers</span></div>
+      </div>
+    </div>
+    <div class="project-card fade-up" data-category="digital" onclick="openModal('modal-13')">
+      <div class="card-image"><img src="images/Intranet.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="card-overlay"><button class="overlay-cta">View Project</button></div></div>
+      <div class="card-body">
+        <div class="card-meta">Digital &amp; Social <span>&middot;</span> 2023 &amp; 2025</div>
+        <h3 class="card-title">Intranet Development: Griffith &amp; USPR</h3>
+        <p class="card-desc">Built and launched internal communication platforms to improve collaboration and access across both organizations.</p>
+        <div class="card-results"><span class="result-chip">5,000+ Employees</span><span class="result-chip">Griffith &amp; USPR</span><span class="result-chip">Increased Adoption</span></div>
+      </div>
+    </div>
+    <div class="project-card fade-up" data-category="events" onclick="openModal('modal-14')">
+      <div class="card-image"><img src="images/USPR_Events.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="card-overlay"><button class="overlay-cta">View Project</button></div></div>
+      <div class="card-body">
+        <div class="card-meta">Events &amp; Experiential <span>&middot;</span> 2025</div>
+        <h3 class="card-title">USPR Events Strategy</h3>
+        <p class="card-desc">Led event strategy for demand generation and brand awareness, driving high-quality leads and customer relationships.</p>
+        <div class="card-results"><span class="result-chip">180+ Leads/Event</span><span class="result-chip">New Business</span><span class="result-chip">Brand Visibility</span></div>
+      </div>
+    </div>
+    <div class="project-card fade-up" data-category="additional" onclick="openModal('modal-15')">
+      <div class="card-image"><img src="images/Stagegate.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;"><div class="card-overlay"><button class="overlay-cta">View Project</button></div></div>
+      <div class="card-body">
+        <div class="card-meta">Additional Experience <span>&middot;</span> 2016&ndash;2017</div>
+        <h3 class="card-title">Global Stage Gate Process: Glanbia</h3>
+        <p class="card-desc">Owned the global innovation process across multiple brands, managing 12&ndash;15 concurrent projects spanning R&amp;D, marketing, regulatory, and supply chain.</p>
+        <div class="card-results"><span class="result-chip">12&ndash;15 Projects</span><span class="result-chip">Global Brands</span><span class="result-chip">Improved Launch Rate</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="resume-banner fade-up">
+  <div class="resume-banner-text">
+    <h3>Want the full story?</h3>
+    <p>Download my resume for a complete overview of experience, education, and skills.</p>
+  </div>
+  <a href="Laura_Payne_Resume.pdf" class="btn-primary" target="_blank">Download Resume &#8595;</a>
+</div>
+
+<footer>
+  <a href="#about" class="footer-logo">LP</a>
+  <div class="footer-contact-block">
+    <p class="footer-blurb">I'm currently exploring my next opportunity in a Director-level and above role, where I can bring together brand strategy, communications, integrated marketing, and team leadership to drive meaningful business results. If that aligns with what you're building, or you'd simply like to connect, feel free to reach out.</p>
+    <div class="footer-links-row">
+      <a href="/cdn-cgi/l/email-protection#deb2bfabacbfaebfa7b0bbeeecefec9eb9b3bfb7b2f0bdb1b3">&#9993; <span class="__cf_email__" data-cfemail="c4a8a5b1b6a5b4a5bdaaa1f4f6f5f684a3a9a5ada8eaa7aba9">[email&#160;protected]</span></a>
+      <a href="https://linkedin.com/in/laura-payne-43077739" target="_blank">&#128188; linkedin.com/in/laura-payne-43077739</a>
+    </div>
+  </div>
+  <p class="footer-copy">&copy; 2025 Laura Payne &middot; All rights reserved</p>
+</footer>
+
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOnBg(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&#10005;</button>
+    <div class="modal-header">
+      <div class="modal-tag" id="modal-tag"></div>
+      <h2 class="modal-title" id="modal-title"></h2>
+      <p class="modal-role" id="modal-role"></p>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+var projects = {
+  'modal-1':{tag:'Integrated Campaigns · Isopure · 2018',title:'Isopure Infusions: Innovation Launch',role:'Role: Led the go-to-market strategy, campaign execution, and cross-functional alignment',overview:'Identified a strategic opportunity to expand Isopure beyond its core performance nutrition audience into a broader lifestyle segment. Developed and launched Isopure Infusions to drive incremental growth with a fresh, modern audience.',contributions:['Developed and executed an integrated global campaign spanning digital, social, influencer, and retail channels','Directed athlete and influencer strategy, overseeing paid media investment and partner selection','Partnered with sales and retail teams to drive distribution expansion and in-store conversion','Managed cross-functional execution across marketing, sales, and external agency partners'],results:[]},
+  'modal-2':{tag:'Integrated Campaigns · Isopure · 2021',title:'Isopure "Pure Is Personal" Campaign',role:'Role: Co-led integrated brand campaign focused on differentiation and audience expansion',overview:'Repositioned the Isopure brand to sharpen competitive differentiation and drive trial among new consumer segments. The "Pure Is Personal" platform centered on individual health journeys, broadening appeal while retaining the core audience.',contributions:['Defined audience segmentation strategy and developed tailored messaging frameworks','Led cross-channel campaign execution across paid media, social, content, and digital','Aligned internal stakeholders across brand, insights, and sales functions','Managed agency partners and drove ongoing campaign performance optimization'],results:[{num:'20M+',label:'Impressions Delivered'},{num:'+12%',label:'Website Traffic Increase'},{num:'+5%',label:'Brand Awareness Lift'}]},
+  'modal-3':{tag:'Integrated Campaigns · Griffith Foods · 2023-2024',title:'Griffith Foods: Food & Flavor Outlook',role:'Role: Led global content platform and campaign strategy',overview:"Developed a flagship thought leadership program to drive meaningful customer engagement and support strategic sales conversations around food innovation. Built Griffith's authority as a forward-thinking partner in the food industry.",contributions:['Developed a global content strategy aligned to business priorities and customer insights','Partnered with culinary, insights, and sales teams to produce market-relevant content','Activated an integrated campaign across LinkedIn, digital, and sales enablement channels','Led team execution and coordinated external agency deliverables'],results:[{num:'400+',label:'Qualified Leads Generated'},{num:'50+',label:'Customer Sales Conversations'},{num:'1.5%',label:'LinkedIn CTR'}]},
+  'modal-4':{tag:'Integrated Campaigns · Griffith Foods · 2024',title:'Griffith Foods: Thought Leadership White Papers',role:'Role: Led content strategy and demand generation activation',overview:"Launched a strategic white paper series to elevate internal subject matter experts as industry thought leaders. The program supported growth by generating high-quality leads and establishing credibility with key customer segments.",contributions:['Built a content roadmap aligned to priority business initiatives and sales targets','Translated complex SME expertise into accessible, compelling thought leadership','Activated campaigns across LinkedIn and email marketing to maximize reach and conversion','Managed cross-functional collaboration and tracked performance against pipeline goals'],results:[{num:'1,200+',label:'Downloads Per Paper'},{num:'300',label:'Marketing Qualified Leads'},{num:'5%',label:'Email CTR (Above Benchmark)'}]},
+  'modal-5':{tag:'Brand & Strategy · Griffith Foods · 2022',title:'Griffith Foods: Global Brand Transformation',role:'Role: Led global brand messaging and identity standardization',overview:'Transformed a fragmented, region-by-region brand presence into a cohesive global identity. Required aligning stakeholders across 5 regions and 12 markets while building systems for fast, consistent campaign execution worldwide.',contributions:['Developed comprehensive global brand guidelines and a unified messaging framework','Established a governance model to ensure cross-regional alignment and adoption','Created photography and content standards for consistent global application','Drove adoption across all regions through structured rollout and stakeholder engagement'],results:[{num:'100%',label:'Global Adoption Across Regions'},{num:'+25%',label:'Campaign Speed-to-Market'},{num:'12',label:'Markets Aligned'}]},
+  'modal-6':{tag:'Brand & Strategy · Griffith Foods · 2022-2025',title:'Executive & Leadership Communications',role:'Role: Strategic advisor and content lead for C-suite communications',overview:'Partnered closely with executive leadership to develop communications that strengthened leadership presence, drove organizational alignment, and connected business strategy to internal and external audiences.',contributions:['Developed executive messaging frameworks, speeches, and thought leadership content','Supported press engagements, internal communications, and executive digital presence','Built leadership brand narratives aligned to organizational priorities'],results:[{num:'20+',label:'Executive Communications Initiatives'},{num:'+25%',label:'Engagement on Leadership Content'}]},
+  'modal-7':{tag:'Brand & Strategy · USPR · 2025',title:'USPR Brand Refresh',role:'Role: Led end-to-end brand repositioning and creative transformation',overview:"Modernized USPR's brand identity and messaging to better reflect its market position and drive stronger audience connection. Spanned brand archetype development, messaging strategy, visual system creation, and internal adoption.",contributions:['Led development of updated brand strategy, positioning, and messaging architecture','Managed agency partnership for brand archetype development and creative execution','Facilitated internal workshops to drive alignment and accelerate adoption across teams'],results:[{num:'✓',label:'Full Brand System Delivered'},{num:'✓',label:'Internal Alignment Achieved'},{num:'✓',label:'Elevated Market Relevance'}]},
+  'modal-8':{tag:'Partnerships & Licensing · Wells Enterprises · 2021-2022',title:'Wells Licensing: Sega & Disney',role:'Role: Owned licensing strategy and managed partner relationships',overview:'Managed and strategically expanded high-value licensing partnerships with global entertainment brands to drive product innovation and incremental revenue. The portfolio represented significant share of the overall business.',contributions:['Negotiated and successfully extended licensing agreements with favorable terms','Led product refresh and innovation pipeline development in collaboration with partners','Managed cross-functional execution with internal teams and partner organizations'],results:[{num:'2028',label:'Sega Contract Extended Through'},{num:'10%',label:'Licensing Portfolio Share'},{num:'4%',label:'Attributed to These Two Projects'}]},
+  'modal-9':{tag:'Events & Experiential · Isopure · 2019',title:'Isopure Events Strategy',role:'Role: Led event strategy and execution across major industry events',overview:"Managed Isopure's experiential marketing presence at major fitness and sports industry events, creating immersive brand experiences designed to drive awareness, direct engagement, and lead capture at scale.",contributions:['Developed event strategy and activation playbook across multiple shows','Directed booth experience design, staffing, and on-site execution','Integrated social and digital components to extend event reach beyond the floor'],results:[{num:'3,000+',label:'Booth Visitors Per Event'},{num:'1,500+',label:'Email Captures Per Event'},{num:'',label:'Brand Awareness & Social Engagement'}]},
+  'modal-10':{tag:'Events & Experiential · Griffith Foods · 2024',title:'Griffith Foods: 2030 Aspirations Global Summit',role:'Role: Led global internal event strategy and execution',overview:"Designed and executed a 3-day global leadership summit to officially launch Griffith Foods' 2030 sustainability strategy and drive deep organizational alignment across 230 senior leaders worldwide.",contributions:['Led end-to-end event planning, programming, and logistics for 230 global attendees','Developed the content strategy, keynote framework, and interactive engagement programming','Created a custom event app to enhance real-time interaction and attendee experience'],results:[{num:'230',label:'Global Leaders Engaged'},{num:'3',label:'Day Summit Duration'},{num:'',label:'High Event App Adoption'}]},
+  'modal-11':{tag:'Digital & Social · Multiple Brands · 2018-2025',title:'Digital & Social Strategy',role:'Role: Owned strategy, budget, and execution across brands',overview:'Led digital and social marketing strategy across multiple brands and verticals over 7+ years, managing significant budgets and delivering consistent growth in reach, engagement, and ROI.',contributions:['Owned full-funnel digital strategy from paid media to organic social to content programming','Managed agency relationships, platform investments, and performance optimization','Built and scaled LinkedIn presence for B2B brands through thought leadership and content','Developed content calendars, messaging pillars, and brand voice guidelines'],results:[{num:'$4M+',label:'Digital Budget Managed'},{num:'50K+',label:'LinkedIn Followers Grown (Griffith)'},{num:'1-5%',label:'Engagement Rates Across Platforms'}]},
+  'modal-12':{tag:'Digital & Social · Isopure · 2020',title:'Isopure Social Collaborations',role:'Role: Led partnership-driven social campaign strategy',overview:"Developed and executed brand collaboration campaigns on social media, partnering with complementary wellness and lifestyle brands to extend Isopure's reach to new audiences at high efficiency.",contributions:['Identified and negotiated 9 strategic brand partnerships for co-marketing campaigns','Developed collaboration content strategy and managed end-to-end execution','Tracked and reported on reach, engagement, and follower growth across all partnerships'],results:[{num:'9',label:'Brand Collaborations Executed'},{num:'5-20M',label:'Total Reach Generated'},{num:'3M',label:'Total Engagements'},{num:'6K',label:'Net New Followers'}]},
+  'modal-13':{tag:'Digital & Social · Griffith Foods & USPR · 2023 & 2025',title:'Intranet Development: Griffith & USPR',role:'Role: Led development of internal communication platforms',overview:'Built and launched intranet platforms at two organizations to address fragmented internal communication, low information accessibility, and underutilized tools. At Griffith Foods, the platform served 5,000+ global employees. At USPR, it replaced an outdated externally-hosted system.',contributions:['Led end-to-end platform strategy, design, and launch at both organizations','Identified and resolved key pain points: buried content, limited update access, and low adoption','Partnered with IT, HR, and leadership to integrate systems and centralize communication','Drove adoption through change management, training, and ongoing content programming'],results:[{num:'5,000+',label:'Global Employees Supported (Griffith)'},{num:'',label:'Improved Cross-Functional Collaboration'},{num:'',label:'Increased Tool Adoption'}]},
+  'modal-14':{tag:'Events & Experiential · USPR · 2025',title:'USPR Events Strategy',role:'Role: Led event strategy for demand generation and brand awareness',overview:"Drove USPR's presence at key industry events, including IFT First 2025 and the International Baking Industry Exposition, to generate qualified leads, build brand visibility, and support sales through high-value in-person interactions.",contributions:['Developed event strategy and activation approach aligned to demand generation goals','Managed booth presence, pre-event outreach, and on-site brand experience','Supported sales team with event-driven lead handoff and follow-up strategy'],results:[{num:'180+',label:'Leads Generated Per Event'},{num:'',label:'Customer Relationships Strengthened'},{num:'',label:'Brand Visibility in Market'}]},
+  'modal-15':{tag:'Additional Experience · Glanbia · 2016-2017',title:'Global Stage Gate Process: Glanbia',role:'Role: Process owner and cross-functional program lead',overview:"Led Glanbia's global innovation process across a broad brand portfolio, including ON, Isopure, thinkThin, and others, managing the end-to-end Stage Gate framework governing how new products moved from concept through launch.",contributions:['Owned the Stage Gate process and governance model across 12-15 concurrent global innovation projects','Improved cross-functional alignment across R&D, marketing, regulatory, and supply chain teams','Developed tracking systems and reporting frameworks to monitor project status and flag risks','Increased product launch success rate through structured process discipline and stakeholder accountability'],results:[{num:'12-15',label:'Concurrent Global Projects Managed'},{num:'',label:'Improved Cross-Functional Efficiency'},{num:'',label:'Higher Product Launch Success Rate'}]}
+};
+
+function openModal(id){
+  var d=projects[id]; if(!d) return;
+  document.getElementById('modal-tag').textContent=d.tag;
+  document.getElementById('modal-title').textContent=d.title;
+  document.getElementById('modal-role').textContent=d.role;
+  var h='<div class="modal-section"><h4>Overview</h4><p>'+d.overview+'</p></div>';
+  if(d.contributions&&d.contributions.length){
+    h+='<div class="modal-section"><h4>Key Contributions</h4><ul class="modal-list">';
+    d.contributions.forEach(function(c){h+='<li>'+c+'</li>';});
+    h+='</ul></div>';
+  }
+  if(d.results&&d.results.length){
+    h+='<div class="modal-section"><h4>Results</h4><div class="modal-results-grid">';
+    d.results.forEach(function(r){h+='<div class="modal-result-card"><div class="modal-result-num">'+r.num+'</div><div class="modal-result-label">'+r.label+'</div></div>';});
+    h+='</div></div>';
+  }
+  document.getElementById('modal-body').innerHTML=h;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open');document.body.style.overflow='';}
+function closeModalOnBg(e){if(e.target===document.getElementById('modal-overlay'))closeModal();}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+document.querySelectorAll('.filter-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    var f=btn.dataset.filter;
+    document.querySelectorAll('.project-card').forEach(function(c){c.style.display=(f==='all'||c.dataset.category===f)?'':'none';});
+  });
+});
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecti
