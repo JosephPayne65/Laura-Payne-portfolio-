@@ -88,6 +88,10 @@
   .footer-links-row{display:flex;gap:28px;flex-wrap:wrap;}
   .footer-links-row a{font-size:13px;color:rgba(244,247,249,0.7);text-decoration:none;transition:color 0.2s;}
   .footer-links-row a:hover{color:#7EC8D8;}
+  .email-copy{font-size:13px;color:rgba(244,247,249,0.7);cursor:pointer;position:relative;user-select:none;transition:color 0.2s;}
+  .email-copy:hover{color:#7EC8D8;}
+  .copy-badge{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#3AA0C2;color:#fff;font-size:11px;padding:4px 10px;border-radius:2px;white-space:nowrap;pointer-events:none;}
+  .copy-badge.show{display:block;}
   .footer-copy{font-size:11px;color:rgba(244,247,249,0.2);letter-spacing:0.04em;align-self:flex-end;flex-shrink:0;}
   .fade-up{opacity:0;transform:translateY(28px);transition:opacity 0.6s ease,transform 0.6s ease;}
   .fade-up.visible{opacity:1;transform:none;}
@@ -316,7 +320,10 @@
   <div class="footer-contact-block">
     <p class="footer-blurb">I'm currently exploring my next opportunity in a Director-level and above role, where I can bring together brand strategy, communications, integrated marketing, and team leadership to drive meaningful business results. If that aligns with what you're building, or you'd simply like to connect, feel free to reach out.</p>
     <div class="footer-links-row">
-      <a href="/cdn-cgi/l/email-protection#deb2bfabacbfaebfa7b0bbeeecefec9eb9b3bfb7b2f0bdb1b3">&#9993; <span class="__cf_email__" data-cfemail="c4a8a5b1b6a5b4a5bdaaa1f4f6f5f684a3a9a5ada8eaa7aba9">[email&#160;protected]</span></a>
+      <span class="email-copy" onclick="copyEmail()" title="Copy email">
+        &#9993; laurapayne0212@gmail.com
+        <span class="copy-badge" id="copy-badge">Copied!</span>
+      </span>
       <a href="https://linkedin.com/in/laura-payne-43077739" target="_blank">&#128188; linkedin.com/in/laura-payne-43077739</a>
     </div>
   </div>
@@ -385,4 +392,9 @@ document.querySelectorAll('.filter-btn').forEach(function(btn){
     document.querySelectorAll('.project-card').forEach(function(c){c.style.display=(f==='all'||c.dataset.category===f)?'':'none';});
   });
 });
-var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecti
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(function(el){ obs.observe(el); });
+</script>
+</body>
+</html>
